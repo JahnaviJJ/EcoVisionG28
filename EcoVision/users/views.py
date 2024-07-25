@@ -42,4 +42,5 @@ def profile_update(request):
 
 @login_required
 def custom_logout(request):
+    logout(request) #Logout view
     return render(request,'users/logout.html')
