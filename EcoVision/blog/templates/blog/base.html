@@ -1,0 +1,142 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'blog/main.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="site-header">
+      <nav class="navbar w-full navbar-expand-md navbar-dark bg-steel fixed-top">
+        <div class="container w-full">
+         <a class="navbar-brand" href="{% url 'blog-home' %}">
+                <img src="{% static 'images/EcoVision.png' %}" alt="EcoVision Logo" style="width: 50px; height: 50px;">
+            </a>
+          <div class="collapse navbar-collapse w-full" id="navbarToggle">
+                 {% if user.is_authenticated %}
+            <!-- Navbar Right Side -->
+            <div class="navbar-nav d-flex flex-1 gap-10 w-full">
+                <a href="{% url 'home' %}" id="auth-links">
+                    <span></span><span></span><span></span><span></span>Home
+                </a>
+                <a href="{% url 'blog-about' %}" id="auth-links">
+                    <span></span><span></span><span></span><span></span>About Us
+                </a>
+                <a href="{% url 'blog-home' %}" id="auth-links">
+                    <span></span><span></span><span></span><span></span>Blogs
+                </a>
+                <a href="{% url 'team' %}" id="auth-links">
+                    <span></span><span></span><span></span><span></span>Team
+                </a>
+                <a href="{% url 'event' %}" id="auth-links">
+                    <span></span><span></span><span></span><span></span>Event
+                </a>
+                <a href="{% url 'blog-new' %}" id="auth-links">
+                    <span></span><span></span><span></span><span></span>Create Post
+                </a>
+                <a href="{% url 'profile' %}" id="auth-links">
+                    <span></span><span></span><span></span><span></span>Profile
+                </a>
+                <a href="{% url 'logout' %}" id="auth-links">
+                    <span></span><span></span><span></span><span></span>Logout
+                </a>
+            </div>
+            {% else %}
+            <div class="navbar-nav d-flex flex-1 gap-10 w-full">
+                <a href="{% url 'home' %}" id="auth-links">
+                    <span></span><span></span><span></span><span></span>Home
+                </a>
+                 <a href="{% url 'blog-about' %}" id="auth-links">
+                    <span></span><span></span><span></span><span></span>About Us
+                </a>
+                <a href="{% url 'blog-home' %}" id="auth-links">
+                    <span></span><span></span><span></span><span></span>Blogs
+                </a>
+                <a href="{% url 'team' %}" id="auth-links">
+                    <span></span><span></span><span></span><span></span>Team
+                </a>
+                <a href="{% url 'login' %}" id="auth-links">
+                    <span></span><span></span><span></span><span></span>Login
+                </a>
+                <a href="{% url 'register' %}" id="auth-links">
+                    <span></span><span></span><span></span><span></span>Register
+                </a>
+            </div>
+            {% endif %}
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main role="main" class="container">
+      <div class="row">
+          <div class="col-md-8">
+              {%  if messages%}
+                {% for message in messages %}
+                    <div class="alert-{{ message.tags }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+              {% endif %}
+          </div>
+        <div class="col-md-8">
+           {% block content %}{% endblock %}
+        </div>
+        <div class="col-md-4">
+          <div class="content-sectionw">
+            <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-white" style="width: 380px;" style="padding-top: 120px;">
+                <a id="list-group" style="text-decoration: none;" href="" class="d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none border-bottom">
+                  <span class="fs-5 fw-semibold" id="gist-btn">Latest Gist</span>
+                </a>
+                <div class="list-group list-group-flush border-bottom scrollarea">
+                  <a href="#" class="list-group-item list-group-item-action  lh-tight" aria-current="true">
+                    <div class="d-flex w-100 align-items-center justify-content-between">
+                      <strong class="mb-1">Seriously, Stop Trying to Teach Toddlers How to Code...By Desphixs
+                    </strong>
+                      <small>Wed</small>
+                    </div>
+                    <div class="col-10 mb-1 small">AS A BABY nerd, I was obsessed with Hackers. The 1995 cult movie... </div>
+                  </a>
+                  <a href="#" class="list-group-item list-group-item-action py-3 lh-tight">
+                    <div class="d-flex w-100 align-items-center justify-content-between">
+                      <strong class="mb-1">Its not a bug - It's a feature... by Desphixs</strong>
+                      <small class="text-muted">Tues</small>
+                    </div>
+                    <div class="col-10 mb-1 small">When it comes to coding, everything works like a miracle, let me use that word...hahaha</div>
+                  </a>
+                  <a href="#" class="list-group-item list-group-item-action py-3 lh-tight">
+                    <div class="d-flex w-100 align-items-center justify-content-between">
+                      <strong class="mb-1">I wanted to be a great programmer but...by Desphixs</strong>
+                      <small class="text-muted">Mon</small>
+                    </div>
+                    <div class="col-10 mb-1 small">in my family trait, nobody knows anything about computers and i wanted to be the greatest computer scientist ever and...</div>
+                  </a>
+
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+
+
+
+     <div class="d-flex justify-content-between py-4 my-4 border-top">
+         <footer>
+
+         </footer>
+     </div>
+    </main>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>

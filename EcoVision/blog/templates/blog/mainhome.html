@@ -1,0 +1,79 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block content %}
+<div class="container my-5">
+    <!-- Project Summary Section -->
+    <section class="project-summary">
+            <h2>EcoVision</h2>
+  <!-- User Count Section -->
+    <div class="user-count-section p-4 mb-4 bg-info text-white text-center rounded">
+        <h2 id="userCount">Number of Registered Users</h2>
+        <div id="userCount">{{ user_count }}</div>
+    </div>
+
+            <div class="photo-tiles">
+                <div class="tile">
+                    <img src="{% static 'images/photo1.jpg' %}" alt="Project Photo 1">
+                    <p>Environment Conservation</p>
+                </div>
+                <div class="tile">
+                    <img src="{% static 'images/photo2.jpg' %}" alt="Project Photo 2">
+                    <p>Renewable Sources</p>
+                </div>
+                <div class="tile">
+                    <img src="{% static 'images/photo3.avif' %}" alt="Project Photo 3">
+                    <p>Photo 3 Description</p>
+                </div>
+            </div>
+
+            <div class="project-text">
+                <p>
+                    Welcome to EcoVision, your premier destination for everything green technology, renewable energy, and environmental conservation. Our mission is to educate, inspire, and empower individuals and communities to embrace sustainable practices and technologies that can make a significant difference in our world.
+                </p>
+            </div>
+
+            
+                <div class="video-tile">
+    <iframe width-560 height="315" src="https://www.youtube.com/embed/fGRgr4EyLHQ?si=SYZdvxfYbDvo5Njv" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <p>Top 10 Green Technologies</p>
+</div>
+                <div class="video-tile">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/vI1dBBfjAxQ?si=GFDt6o7sblCuchQY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<p>EcoFriendly Innovations </p>
+</div>
+         <div class="video-tile">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/6TmSqBz4esU?si=_HswfBue6KrE3wn1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<p>Future of Green Technologies</p>
+</div>
+        
+        </section>
+
+  
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<!-- jQuery and Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script>
+
+<!-- AJAX Script to Update User Count -->
+<script>
+    function fetchUserCount() {
+        $.ajax({
+            type: 'GET',
+            url: '{% url "get_user_count" %}',
+            success: function(response) {
+                $('#userCount').text(response.user_count);
+            },
+            error: function(xhr, status, error) {
+                console.error('AJAX Error: ' + status + error);
+            }
+        });
+    }
+
+    $(document).ready(function(){
+        setInterval(fetchUserCount, 5000);
+    });
+</script>
+{% endblock %}
