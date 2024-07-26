@@ -3,5 +3,42 @@
 
 {% block content %}
 
-
+<div class="container mt-5">
+    <div class="row custom-section">
+        <div class="col-md-12">
+            <h1 class="display-4 text-center custom-heading my-4">About EcoVision</h1>
+            <p class="lead text-center custom-lead mb-5">Promoting awareness and education on green technology, renewable energy, and environmental conservation.</p>
+        </div>
+    </div>
+    <div class="row custom-section">
+        <div class="col-md-6 mb-4">
+            <h2 class="custom-heading">Our Mission</h2>
+            <p class="custom-text">At EcoVision, our mission is to educate, inspire, and empower individuals and communities to embrace sustainable practices and technologies. We aim to foster a deeper understanding of the importance of green technology and environmental conservation.</p>
+        </div>
+        <div class="col-md-6 mb-4">
+            <img src="{% static 'images/mission.png' %}" class="img-fluid rounded" alt="Mission Image">
+        </div>
+    </div>
+    <div class="row custom-section">
+        <div class="col-md-6 mb-4">
+            <img src="{% static 'images/vision.png' %}" class="img-fluid rounded" alt="Vision Image">
+        </div>
+        <div class="col-md-6 mb-4">
+            <h2 class="custom-heading">Our Vision</h2>
+            <p class="custom-text">Our vision is a world where green technology and renewable energy are at the forefront of societal progress. We strive to be a leading platform that connects people with the latest advancements and best practices in these fields, paving the way for a sustainable future.</p>
+        </div>
+    </div>
+    <div class="row custom-section">
+        <div class="col-md-6 mb-4">
+            <h2 class="custom-heading">What We Offer</h2>
+            <p class="custom-text">EcoVision provides a wide range of content including articles,
+                blogs, podcasts, and videos. We cover the latest advancements in solar power,
+                wind energy, eco-friendly innovations, and conservation strategies.
+                Our platform also features Events and conferences related to green technology</p>
+        </div>
+        <div class="col-md-6 mb-4">
+            <img src="{% static 'images/offer.svg' %}" class="img-fluid rounded" alt="Offer Image">
+        </div>
+    </div>
+</div>
 {% endblock %}
