@@ -9,7 +9,6 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
 
-
 @login_required
 def event_detail(request, pk):
     event = Event.objects.get(pk=pk)
@@ -44,7 +43,12 @@ def book_event(request, event_id):
 
 
 def search(request):
-    return render(request, 'blog/search-results.html')
+    query = request.GET.get('q')
+    if query:
+        posts = Post.objects.filter(title__icontains=query).order_by("-date_posted")
+    else:
+        posts = Post.objects.all()
+    return render(request, 'blog/search-results.html', {'posts': posts})
 
 
 def about(request):
@@ -75,9 +79,11 @@ def event(request):
     is_booked = {event.id: (event.id in booked_events) for event in events}
     return render(request, 'blog/event.html', {'events': events, 'is_booked': is_booked})
 
-
 class PostListView(ListView):
     model = Post
+    template_name = 'blog/home.html'
+    context_object_name = 'posts'
+    ordering = ["-date_posted"]
 
 
 class PostDetailView(LoginRequiredMixin, DetailView):
@@ -91,6 +97,12 @@ class PostCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
+
+    # def test_func(self):
+    #     post = self.get_object()
+    #     if self.request.user == post.author:
+    #         return True
+    #     return False
 
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
